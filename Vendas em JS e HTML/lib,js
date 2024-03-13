@@ -1,0 +1,26 @@
+function calcularVenda() {
+    var valorVenda = parseFloat(document.getElementById('ValorVenda').value);
+    var parcelas = parseInt(document.getElementById('Parcelas').value);
+    var valorParcela;
+    var valorTotal;
+
+    if (isNaN(valorVenda) || isNaN(parcelas) || parcelas <= 0) {
+        document.getElementById('resultado').innerHTML = "Por favor, insira valores válidos.";
+    } else {
+        if (parcelas === 1) {
+            valorTotal = valorVenda * 0.9; // À vista com desconto de 10%
+            valorParcela = valorTotal.toFixed(2);
+            document.getElementById('resultado').innerHTML = 'O valor total da venda à vista com desconto de 10% é: R$' + valorTotal.toFixed(2) + '<br>' + 'Valor da parcela: R$' + valorParcela;
+        } else if (parcelas <= 3) {
+            valorTotal = valorVenda; // Até 3x sem juros
+            valorParcela = (valorTotal / parcelas).toFixed(2);
+            document.getElementById('resultado').innerHTML = 'O valor total da venda em ' + parcelas + 'x sem juros é: R$' + valorTotal.toFixed(2) + '<br>' + 'Valor da parcela: R$' + valorParcela;
+        } else {
+            valorTotal = valorVenda * (1 + parcelas * 0.1); // 4x ou mais com juros de 10%
+            valorParcela = (valorTotal / parcelas).toFixed(2);
+            document.getElementById('resultado').innerHTML = 'O valor total da venda em ' + parcelas + 'x com juros de 10% é: R$' + valorTotal.toFixed(2) + '<br>' + 'Valor da parcela: R$' + valorParcela;
+        }
+    }
+}
+
+
